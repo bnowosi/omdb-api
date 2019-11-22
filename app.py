@@ -17,9 +17,24 @@ def movie():
         year = item['Year']
         poster = item['Poster']
         imdbID = item['imdbID']
+        plot = item['Plot']
 
     return render_template('movie.html', items=items)
 
+@app.route('/info/<id>', methods=['POST','GET'])
+def info(id):
+    apikey = '6f6c977'
+    id_search = id
+    r = requests.get('http://www.omdbapi.com/?apikey='+apikey+'&i='+id_search)
+    json_object = r.json()
+
+    title = json_object['Title']
+    rated = json_object['Rated']
+    poster = json_object['Poster']
+    runtime = json_object['Runtime']
+    plot = json_object['Plot']
+
+    return render_template('info.html', title=title, rated=rated, poster=poster, runtime=runtime)
 
 @app.route('/')
 def index():
