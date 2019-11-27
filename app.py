@@ -17,7 +17,6 @@ def movie():
         year = item['Year']
         poster = item['Poster']
         imdbID = item['imdbID']
-        plot = item['Plot']
 
     return render_template('movie.html', items=items)
 
@@ -34,7 +33,13 @@ def info(id):
     runtime = json_object['Runtime']
     plot = json_object['Plot']
 
-    return render_template('info.html', title=title, rated=rated, poster=poster, runtime=runtime)
+    items = json_object['Ratings']
+
+    for item in items:
+        source = item['Source']
+        value = item['Value']
+
+    return render_template('info.html', items=items, title=title, rated=rated, poster=poster, runtime=runtime, plot=plot)
 
 @app.route('/')
 def index():

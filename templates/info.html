@@ -29,6 +29,12 @@
 				<td><h2> {{ runtime }}</h2></td>
 				<td><h2> {{ plot }}</h2></td>
 			</tr>
+			<tr>
+				{% for item in items %}
+					{{item.Source}}
+					{{item.Value}}
+				{% endfor %}
+			</tr>
 		</tbody>
 	</table>
     </div>
